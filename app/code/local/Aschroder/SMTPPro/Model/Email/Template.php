@@ -24,6 +24,9 @@ class Aschroder_SMTPPro_Model_Email_Template extends Mage_Core_Model_Email_Templ
      **/
     public function send($email, $name = null, array $variables = array())
     {
+        // NOTE: reload attributes configuration for mixed email templates with products.
+        Mage::getSingleton('eav/config')->clear();
+    
         $_helper = Mage::helper('smtppro');
         // If it's not enabled, just return the parent result.
         if (!$_helper->isEnabled()) {
@@ -73,7 +76,7 @@ class Aschroder_SMTPPro_Model_Email_Template extends Mage_Core_Model_Email_Templ
         if (!$_helper->isQueueBypassed() &&
             $this->hasQueue() && $this->getQueue() instanceof Mage_Core_Model_Email_Queue) {
 
-            /** @var $emailQueue Mage_Core_Model_Email_Queue */
+            /** @var Mage_Core_Model_Email_Queue $emailQueue */
             $emailQueue = $this->getQueue();
             $emailQueue->clearRecipients();
             $emailQueue->setMessageBody($text);

@@ -22,7 +22,13 @@ class Aschroder_SMTPPro_Helper_Data extends Mage_Core_Helper_Abstract
     }
 
 
-    public function log($m)
+    /**
+     * Logs a message to the aschroder_smtppro.log file if debug logging is enabled.
+     *
+     * @param  array|object|string $m
+     * @return void
+     */
+    public function log(array|object|string $m): void
     {
         if ($this->isDebugLoggingEnabled()) {
             Mage::log($m, null, self::LOG_FILE);
