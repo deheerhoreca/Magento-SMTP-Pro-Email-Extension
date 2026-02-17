@@ -182,6 +182,10 @@ class Aschroder_SMTPPro_Helper_Mysql4_Install extends Mage_Core_Helper_Abstract
      */
     public function createInstallNotice($msg_title, $msg_desc, $url = null, $severity = null)
     {
+        if (! Mage::helper('core')->isModuleEnabled('Mage_AdminNotification')) {
+            return;
+        }
+        
         $message = Mage::getModel('adminnotification/inbox');
         if( $message ){
             
@@ -257,3 +261,4 @@ class Aschroder_SMTPPro_Helper_Mysql4_Install extends Mage_Core_Helper_Abstract
     }
     
 }
+
