@@ -45,8 +45,8 @@ class Aschroder_SMTPPro_Smtp_LogController
 	 *
 	 * @return bool
 	 */
-	protected function _isAllowed() {
-		return Mage::getSingleton('admin/session')->isAllowed('admin/system/tools/smtppro');
+	protected function _isAllowed(): bool {
+		return (bool) Mage::getSingleton('admin/session')->isAllowed('admin/system/tools/smtppro');
 	}
 
 } 
